@@ -6,11 +6,15 @@
   "author": "Kayk Mascarenhas <kaykdsg@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch --env-file .env src/server.ts"
   },
   "devDependencies": {
     "@types/node": "^20.12.2",
+    "prisma": "^5.11.0",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2"
   }
 }

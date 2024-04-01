@@ -1,0 +1,8 @@
+{
+  "name": "pass.in",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:KsmKayk/pass.in.git",
+  "author": "Kayk Mascarenhas <kaykdsg@gmail.com>",
+  "license": "MIT"
+}

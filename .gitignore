@@ -3,3 +3,7 @@ node_modules
 
 # env files
 .env
+
+# database files
+dev.db
+dev.db-journal

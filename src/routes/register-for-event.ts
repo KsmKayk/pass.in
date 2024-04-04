@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
+import { BadRequest } from "./_errors/bad-request";
 
 export async function registerForEvent(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post("/events/:eventId/attendees", {
@@ -31,7 +32,7 @@ export async function registerForEvent(app: FastifyInstance) {
     });
 
     if (event === null) {
-      throw new Error("Event not found");
+      throw new BadRequest("Event not found");
     }
 
     const attendeeFromEmail = await prisma.attendee.findUnique({
@@ -43,7 +44,7 @@ export async function registerForEvent(app: FastifyInstance) {
     })
 
     if (attendeeFromEmail !== null) {
-      throw new Error("This email is already registered for this event");
+      throw new BadRequest("This email is already registered for this event");
     }
 
     const amountOfAttendeesForEvent = await prisma.attendee.count({
@@ -51,7 +52,7 @@ export async function registerForEvent(app: FastifyInstance) {
     })
 
     if (event.maximumAttendees && amountOfAttendeesForEvent >= event.maximumAttendees) {
-      throw new Error("Event is full");
+      throw new BadRequest("Event is full");
     }
 
     const attendee = await prisma.attendee.create({
